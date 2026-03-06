@@ -12,6 +12,12 @@ private:
     string grade; //letter grades only.
     
 public:
+// Default constructor useful for arrays:
+Course() {
+    name = "";
+    credits = 0;
+    grade = "";
+}
 //public data, built a constructor to make private data accessable we must identify the name,credits,grade in int main later.
     Course(string n, int c, string g) {
         name = n;
