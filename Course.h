@@ -47,6 +47,8 @@ public:
         if (grade == "F" || grade == "f") return 0.0;
         return 0.0; //if none of the above match.
     }
-    
+    double getTotalPoints() const {
+        return credits * getGradePoints();
+    }  
 };
 
