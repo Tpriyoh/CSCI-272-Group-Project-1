@@ -8,7 +8,7 @@ int main()  {
     cout << "Credits: " << math.getCredits() << endl;
     cout << "Grade: " << math.getGrade() << endl;
     cout << "Grade Points: " << math.getGradePoints() << endl;
-    
+    cout << "Total Points:" << math.getTotalPoints() << endl;
     
     return 0;
 }
