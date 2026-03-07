@@ -1,5 +1,13 @@
+/* 
+Name: Tanzin Priyoh
+Course: CSCI 272(1)
+Group Project 1
+*/
+
+
 #include <iostream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 
@@ -55,6 +63,25 @@ Course() {
     }
     double getTotalPoints() const {
         return credits * getGradePoints();
-    }  
+    }
+    
+    //cleaner display function for all data on a formatted line.
+    void display() const {
+        cout << left << setw(30) << name
+        << right << setw(15) << credits
+        << setw(15) << grade << fixed << setprecision(2)
+        << setw(15) << getGradePoints()
+        << setw(15) << getTotalPoints() << endl;
+    }
 };
 
+/*
+Tanzin Priyoh --- 3/7/26
+The difficult parts for me were figuring out where const belonged in the getter functions
+because I kept getting errors until I figured out it belongs after you make the paramater list.
+For setw() I had a problem with numbers printing next to eachother because I used a small range like setw(5)
+instead of  giving it more room inbetween entries.
+Next I had a problem with the getGradePoints() function because I wrote (grade == "A" || "a") which made the entire list 
+default to 4.0 everytime you ran the code.
+
+*/
