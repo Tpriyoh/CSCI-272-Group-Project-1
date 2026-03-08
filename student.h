@@ -8,7 +8,7 @@ Group Project 1
 #include <string>
 #include <vector>
 #include <iomanip>
-#include "course.h"
+#include "Course.h"
 using namespace std;
 
 class Student {
