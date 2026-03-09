@@ -45,8 +45,8 @@ class Student {
         cout << left << setw(30) << "Course"
              << right << setw(15) << "Credits"
              << setw(15) << "Grade"
-             << setw(15) << "Points"
-             << setw(15) << "Total" << endl;
+             << setw(15) << "Grade Points"
+             << setw(15) << "Total Points" << endl;
         cout << string(90, '-') << endl;
         
         for (const auto& course : courses) {
@@ -59,11 +59,12 @@ class Student {
 };
 
 /*
-Refection and challenges:
-The challenges/difficult parts I came when handling student class is to filling
+Reflection and challenges:
+The challenges/difficult parts I encountered when handling student class is to filling
 out the code for class Student and what needed to be done in order to
-understand what I got wrong via errors. Another is understanding what needed to
-put in public and what needed to put private in terms of how needed it needed
-to format. That's when I was working on it, I was trying to understand how it it works
-for private and public such as the string name and add course when using void.
+understand what I got wrong via errors. Another is understanding what needs to be placed
+in public function and whats needed to be put in the private functions 
+in terms of how needed it needed to format. That's when I was working on
+it, I was trying to understand how it it works
+for private and public, such as the string name and add course when using void.
 *\
