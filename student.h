@@ -1,7 +1,7 @@
 /*
 Name: Miguel llapa
 Course: CSCI 272
-Date: 
+Date: 03/08/26
 Group Project 1
 */
 #include <iostream>
