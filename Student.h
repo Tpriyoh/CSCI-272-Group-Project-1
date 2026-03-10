@@ -22,7 +22,7 @@ class Student {
     }
     
     string getCourse() const { // get name for course, returns course name
-        return course;
+        return courses;
     }
 
     string getGrade() const { // get name for grade, returns student grade
@@ -30,13 +30,18 @@ class Student {
     }
 
     string getName() const { // get name for name (student name) also returns name for student
-        return name;
+        return StudentName;
     }
 
-
-    void addCourse(const Course& c) { //Added for course.h to start working
+    void addCourse(const Course& c) { //Added so it can add a course to student record
         courses.push_back(c); 
     }
+
+    // Returns courses through and addede vector so that main() can loop through them
+    const vector<Course>& getCourses() const {
+        return courses;
+    }
+
     //Added so it can calculate the total GPA
     double calculateGPA() const {
         if (courses.empty()) return 0.0;
