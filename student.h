@@ -20,6 +20,20 @@ class Student {
     Student(string name) : studentName(name) { 
         
     }
+    
+    string getCourse() const { // get name for course, returns course name
+        return course;
+    }
+
+    string getGrade() const { // get name for grade, returns student grade
+        return grade;
+    }
+
+    string getName() const { // get name for name (student name) also returns name for student
+        return name;
+    }
+
+
     void addCourse(const Course& c) { //Added for course.h to start working
         courses.push_back(c); 
     }
