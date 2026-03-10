@@ -41,20 +41,41 @@ class Student {
     //A print to display the report card after filling out courses, hours
     // and grade later to display for the student
     void displayReportCard() const {
-        cout << "\n--- Report Card for " << studentName << " ---" << endl;
+        cout << "\n--- Student Grade Report " << studentName << " ---" << endl;
         cout << left << setw(30) << "Course"
              << right << setw(15) << "Credits"
              << setw(15) << "Grade"
              << setw(15) << "Grade Points"
              << setw(15) << "Total Points" << endl;
-        cout << string(90, '-') << endl;
         
-        for (const auto& course : courses) {
-            course.display();
+        cout << string(90, '-') << "\n"; //Formatting line
+        for (int i = 0; i < courses.size(); ++1) {
+            course[i].display(); //this will print course name, credit, grade letter, and grade and total in 1 line
+            totalPoints += courses[i].getTotalPoints(); //adds up all total points for each course
         }
-        // Shows/displays the GPA and standing
+
+        gpa = (totalCredit > 0) ? totalPoints / totalCredits: 0.0;
+         //Checks for divide zero to handle bad input
+        string standing;
+        if (gpa >= 3.7) { //If else statement that determines student's standing based on their gpa
+            standing = "Dean's List";
+        } else if (gpa >= 2.0) {
+            standing = "Good Standing";
+        } else {
+            standing = "Probation";
+        }
+        
+        // loops through all courses and shows all in single line format.
         cout << string(90, '-') << endl;
-        cout << "Cumulative GPA: " << fixed << setprecision(2) << calculateGPA() << endl;
+        cout << left << setw(30) << "Total Credits:"
+             << right << setw(45) << totalCredit << "\n";
+        cout << left << setw(30) << "Total Points:"
+             << right << setw(45) << setprecision(2) << totalPoints << "\n";
+        cout << left << setw(30) << "Semester GPA: " 
+            << right << setw(45) << setprecision(2) << gpa << "\n";
+        cout << left << setw(30) << "Standing: "
+             << right << setw(45) << standing << "\n";
+        cout << string(90, '=') << "\n";
     }
 };
 
