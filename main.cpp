@@ -1,6 +1,6 @@
-#include "Course.h" 
-#include <vector> //
-#include <iomanip> // for formatting output
+#include <limits>
+#include <algorithm>
+#include "Student.h" //Only need this file since my teammate have pretty much included everything else
 /* Name: Tun Tun (Jonathan) Aung
  * Course: CSCI 272(1)
  * Professor: Avijit Roy
@@ -13,76 +13,97 @@ int main()  {
     cout << setw(42) << "Student Grade Report\n";
     cout << string(62, '=') << "\n"; //formatting
 
-vector<Course> courses; // a vector to hold all courses from the users entries.
-string name(""), grade("");
-int numOfCourses(0), credits(0), totalCredit(0); //made int and string vales = to 0 or blank to
-double totalPoints(0.0), gpa(0.0);
-    //prevent random autofill.
+    vector<Course> courses; // a vector to hold all courses from the users entries.
+    string name(""), grade("");
+    int numOfCourses(0), credits(0), totalCredit(0); //made int and string vales = to 0 or blank to
+    //double totalPoints(0.0), gpa(0.0);
+        //prevent random autofill.
 
-cout << "How many courses did you take? ";
-cin >> numOfCourses; //total courses taken.
-cin.ignore(); //clears new line so that getline works later.
+    Student student(name); //Create student object using teammate's student class. Will own all courses
 
-for(int i = 0; i < numOfCourses; ++i) { //loop for every course mentioned.
+    cout << "Student Name: :" ; //Prompt user to enter name
+    getline(cin, name);
 
-cout << "Course Name: ";
-getline(cin, name);
+    cout << "How many courses did you take?(1-10): ";
+    while (!(cin >> numOfCourses)|| numOfCourses <=1 || numOfCourses >= 10) { //validate bad input, this says, keep asking for input until there is no empty input and its within 1 <= x <= 10
+        cin.clear(); //reset cin so it can be used again
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); //trying this, prof says this flushes the bad input during class. basically after every cin >>, theres left over '\n', in buffer. this .ignore(...) helps us ignore it
+        cout <<" Invalid input. Enter a number between 1 and 10: ";
+    }
+    cin.ignore(); //clears leftover newline
+    for(int i = 0; i < numOfCourses; ++i) { //loop for every course mentioned.
 
-cout << "Credit Hours: ";
-cin >> credits;
-    totalCredit += credits;
-cin.ignore(); //added again so getline works once more when i call it again.
+        cout << "Course Name: ";
+        getline(cin, name);
 
-cout << "Letter Grade: ";
-getline(cin, grade);
+        cout << "Credit Hours: ";
+        while (!(cin >> credits) || credits <0) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); //build a habit of using this after every cin.
+            cout << "Invalid input, put in number greater than 0";
+        }
+        totalCredit += credits;
+        cin.ignore(); //added again so getline works once more when i call it again.
 
-//once a course object is made its given data is added to this vector
-//and pushed to the back of the list.
-courses.push_back(Course(name, credits, grade));
+        vector<string> validGrade = {"A","a","A-","a-","B+","b+","B","b","B-","b-","C+","c+","C","c","C-","c-","D","d","F","f"};
+        cout << "Letter Grade(A, A-, B+, B, B-, C+, C, C-, D, F): ";
+        getline(cin, grade);
+        while (find(validGrade.begin(), validGrade.end(), grade)== validGrade.end()) { //This says to use .find() go through the entier validGrade list, if it finds it, the while loop breaks, but if it reaches the end (validGrade.end() == True, then ask again
+            cout << " Invalid grade input, use either {A, A-, B+, B, B-, C+, C, C-, D, F} \n";
+            cout << "Letter Grade: ";
+            getline(cin, grade);
+        }
+        //once a course object is made its given data is added to this vector
+        //and pushed to the back of the list.
 
-cout << endl; //added so theres a clear space when a new courses info is being requested.
-}
-cout << "\n\n";
+        //courses.push_back(Course(name, credits, grade)); //Tanzin's code
+        student.addCourse(Course(name, credits, grade));
 
-// loops through all courses and shows them all in a single line format.
-cout << left  << setw(30) << "Course"
-     << right << setw(15) << "Credits"
-              << setw(15) << "Grade"
-              << setw(15) << "Grade Points"
-              << setw(15) << "Total Points" << endl;
+        cout << endl; //added so theres a clear space when a new courses info is being requested.
+    }
+    cout << "\n\n";
 
-    cout << string (90, '-') << "\n" ; //formatting line
-for(int i = 0; i < courses.size(); ++i) {
-    courses[i].display(); // will print Course name, credit, gradeLetter, gradeNum, and total in 1 line.
-    totalPoints += courses[i].getTotalPoints(); // adds up all the total points for each course.
-}
+    // loops through all courses and shows them all in a single line format.
+    cout << left  << setw(30) << "Course"
+         << right << setw(15) << "Credits"
+                  << setw(15) << "Grade"
+                  << setw(15) << "Grade Points"
+                  << setw(15) << "Total Points" << endl;
 
-gpa = (totalCredit > 0) ? totalPoints / totalCredit: 0.0; //calculates gpa by dividing total poitns and total credits
-    //checks for divide zero to handle bad input
-string standing;
-if (gpa >= 3.7) { //If else statement that determines student's standing based off gpa
-    standing = "Dean's List";
-} else if (gpa >= 2.0) {
-    standing = "Good Standing";
-} else {
-    standing = "Probation";
-}
-    // Displays Total Credit, Total points, GPA, and standing in a neat and tidy format. Experimented with setw range, but putting at 45 for sake of personal preference
-cout << string ( 90, '-') << "\n" ;
-cout << left << setw(30) << "Total Credits:"
-     << right << setw(45) << totalCredit << "\n";
-cout << left << setw(30) << "Total Points:"
-     << right << setw(45) << setprecision(2) << totalPoints << "\n";
-cout << left << setw(30) << "Semester GPA: "
-     << right << setw(45) << setprecision(2) << gpa << "\n";
-cout << left <<  setw(30) << "Standing: "
-     << right << setw(45) << standing << "\n";
-cout << string(90, '=') << "\n";
-return 0;
+        cout << string (90, '-') << "\n" ; //formatting line
+    for(int i = 0; i < courses.size(); ++i) {
+        courses[i].display(); // will print Course name, credit, gradeLetter, gradeNum, and total in 1 line.
+        //totalPoints += courses[i].getTotalPoints(); // adds up all the total points for each course.
+        //student.getCourses()[i].display(); //Waiting for miguel to implement getCourse in his student file.
+    }
+
+    // gpa = (totalCredit > 0) ? totalPoints / totalCredit: 0.0; //calculates gpa by dividing total poitns and total credits
+    //     //checks for divide zero to handle bad input
+    // string standing;
+    // if (gpa >= 3.7) { //If else statement that determines student's standing based off gpa
+    //     standing = "Dean's List";
+    // } else if (gpa >= 2.0) {
+    //     standing = "Good Standing";
+    // } else {
+    //     standing = "Probation";
+    // }
+    //     // Displays Total Credit, Total points, GPA, and standing in a neat and tidy format. Experimented with setw range, but putting at 45 for sake of personal preference
+    // cout << string ( 90, '-') << "\n" ;
+    // cout << left << setw(30) << "Total Credits:"
+    //      << right << setw(45) << totalCredit << "\n";
+    // cout << left << setw(30) << "Total Points:"
+    //      << right << setw(45) << setprecision(2) << totalPoints << "\n";
+    // cout << left << setw(30) << "Semester GPA: "
+    //      << right << setw(45) << setprecision(2) << gpa << "\n";
+    // cout << left <<  setw(30) << "Standing: "
+    //      << right << setw(45) << standing << "\n";
+    // cout << string(90, '=') << "\n";
+    return 0;
 }
 
 /* Tun Tun (Jonathan) Aung -- 3/7/26
- * Reflection and challenges: WIthin this group, my role is to take care of the main.cpp, which
+ * Reflection and challenges:
+ * 1. WIthin this group, my role is to take care of the main.cpp, which
  * poses few challenges such as working with what others have done and making sure that I am
  * recognizing public and private data and understanding how to format them.
  * Additionally, everyone worked at a different pace so there are also diffculties trying to move
@@ -90,4 +111,9 @@ return 0;
  * since its diffcult to know how other members will work on their code.
  * E.g. I wasn't sure if I am responsible to calculate the gpa and standing in the main or
  * if member from student class is going to be working with it. (Avoiding redundancy)
+ *
+ * 2. Trying to come up with ways to use while loop to error proof each input intake and their scenarios.
+ *
+ * 3. Understanding the use of cin.clear() and cin.ignore(numeric_limits<streamsize>::max(), '\n') as this is my firs
+ * time using this.
  * */
