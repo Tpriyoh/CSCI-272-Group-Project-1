@@ -90,5 +90,6 @@ For setw() I had a problem with numbers printing next to eachother because I use
 instead of  giving it more room inbetween entries.
 Next I had a problem with the getGradePoints() function because I wrote (grade == "A" || "a") which made the entire list 
 default to 4.0 everytime you ran the code.
-
+And in int main() I used #include <cctype> to force all lowercase letters to become uppercase unlike here because I
+forgot about how to originally do that until I looked up a website for how it worked.
 */
