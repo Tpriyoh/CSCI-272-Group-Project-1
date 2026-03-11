@@ -7,20 +7,25 @@
 */
 #include <limits> //cite: for purpose of .begin() .end(), introduced through claude, further learning done through stackoverflow post on syntax especially the idea of why != instead of ==.
 #include <algorithm>
-#include <cctype>
+#include <cctype> //need this to force all letter grades to be capital letters // source: https://www.geeksforgeeks.org/cpp/convert-cpp-string-to-uppercase/ second example.
 #include "Student.h"//Only need this file since my teammate have pretty much included everything else
 int main()  {
     cout << string(62, '=') << "\n"; //format line
     cout << setw(42) << "Student Grade Report\n";
     cout << string(62, '=') << "\n"; //formatting
 
+
     //vector<Course> courses; // a vector to hold all courses from the users entries.// we already have this in student.h dont need it here
     string name(""), grade("");
     int numOfCourses(0), credits(0), totalCredit(0); //made int and string vales = to 0 or blank to
 
+
+
     cout << "Student Name: :" ; //Prompt user to enter name
     getline(cin, name);
     Student student(name); //Create student object using teammate's student class. Will own all courses // Moved the line down so the student name actually prints on the report card since we are using the student.h file
+
+
 
 
     cout << "How many courses did you take?(1-10): ";
@@ -31,13 +36,20 @@ int main()  {
         cout <<" Invalid input. Enter a number between 1 and 10: ";
     }
     cin.ignore(); //clears leftover newline
+    
+    
+    
+    
     for(int i = 0; i < numOfCourses; ++i) { //loop for every course mentioned.
 
         cout << "Course Name: ";
         getline(cin, name);
+        
+        
+        
 
         cout << "Credit Hours: ";
-        while (!(cin >> credits) || credits <0) {
+        while (!(cin >> credits) || credits < 0) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); //build a habit of using this after every cin.
             cout << "Invalid input, put in number greater than 0: ";
@@ -45,9 +57,14 @@ int main()  {
         totalCredit += credits;
         cin.ignore(); //added again so getline works once more when i call it again.
 
+
+
+        
+        
         cout << "Letter Grade(A, A-, B+, B, B-, C+, C, C-, D, F): ";
 		getline(cin, grade);
 
+        //Refrence: https://www.geeksforgeeks.org/cpp/convert-cpp-string-to-uppercase/ second example.
 		for(int j = 0; j < grade.size(); ++j) {
 			grade[j] = toupper(grade[j]);
 		}
@@ -55,18 +72,23 @@ int main()  {
         //keeps checking if the grade isnt one of the following ones. if invalid it will say invalid entry.
         //if grade DOES = "A" the loop stops right there and spits out that result
         //if it equals nothing on that list it will push the error.
+        //Source: Claud AI: had to look up a different way to validate a correct entry because a simple if else statement created a problem where 
+        // "Letter grade..." would repeat infinitely.
 		while (grade != "A" && grade != "A-" && grade != "B+" && grade != "B" &&
-		        grade != "B-" && grade != "C+" && grade != "C" && grade != "C-" &&
-		        grade != "D" && grade != "F") {
+		       grade != "B-" && grade != "C+" && grade != "C" && grade != "C-" &&
+		       grade != "D" && grade != "F") {
 
 			cout << "Invalid Entry. What is your 'letter' grade(A, A-, B+, B, B-, C+, C, C-, D, F): ";
 			getline(cin, grade);
 			
+			//Refrence: https://www.geeksforgeeks.org/cpp/convert-cpp-string-to-uppercase/ second example.
 			for(int j = 0; j < grade.size(); ++j) {
 			grade[j] = toupper(grade[j]);
 		}
-
+		
 		}
+		
+		
         
         //once a course object is made its given data is added to this vector
         //and pushed to the back of the list.
@@ -75,11 +97,13 @@ int main()  {
         student.addCourse(Course(name, credits, grade));
 
         cout << endl; //added so theres a clear space when a new courses info is being requested.
-    }
+    } //end of loop.
     
     
     
     cout << "\n\n";
+    
+    
 
     // loops through all courses and shows them all in a single line format.
     cout << left  << setw(30) << "Course"
