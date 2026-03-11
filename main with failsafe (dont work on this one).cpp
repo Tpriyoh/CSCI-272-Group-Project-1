@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <cctype> //need this to force all letter grades to be capital letters // source: https://www.geeksforgeeks.org/cpp/convert-cpp-string-to-uppercase/ second example.
 #include "Student.h"//Only need this file since my teammate have pretty much included everything else
+
+
 int main()  {
     cout << string(62, '=') << "\n"; //format line
     cout << setw(42) << "Student Grade Report\n";
