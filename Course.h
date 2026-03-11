@@ -50,6 +50,7 @@ Course() {
     //error note: didnt add grade == after ||  makinng everything default to 4.0
     //but I added the or just incase the user uses either a capital or lowercase letter.
     // we later fixed this problem using <cctype> making all lowercase letters default to capital letters.
+    // source of grade policy: https://www.cuny.edu/wp-content/uploads/sites/4/page-assets/about/administration/offices/registrar/resources/CUNY-Uniform-Grade-Glossary-and-Guidelines-08012018-1.pdf
     double getGradePoints() const {
         if (grade == "A" || grade == "a") return 4.0;
         if (grade == "A-" || grade == "a-") return 3.7;
