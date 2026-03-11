@@ -93,7 +93,8 @@ int main()  {
         //once a course object is made its given data is added to this vector
         //and pushed to the back of the list.
 
-        //courses.push_back(Course(name, credits, grade)); //Tanzins code before student.h was added.
+        //courses.push_back(Course(name, credits, grade)); //Tanzin's code before student.h was added.
+		//Jonathan's Update
         student.addCourse(Course(name, credits, grade));
 
         cout << endl; //added so theres a clear space when a new courses info is being requested.
