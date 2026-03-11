@@ -43,6 +43,8 @@ int main()  {
     
     
     for(int i = 0; i < numOfCourses; ++i) { //loop for every course mentioned.
+		//failsafes worked on by Johnathan 
+		//Letter grade portion worked on by Tanzin using geeksforgeeks as a refrence.
 
         cout << "Course Name: ";
         getline(cin, name);
