@@ -37,11 +37,6 @@ class Student {
         courses.push_back(c); 
     }
 
-    // Returns courses through and addede vector so that main() can loop through them
-    const vector<Course>& getCourses() const {
-        return courses;
-    }
-
     //Added so it can calculate the total GPA
     double calculateGPA() const {
         if (courses.empty()) return 0.0;
@@ -49,17 +44,20 @@ class Student {
         double totalGradePoints = 0;
         int totalCredits = 0;
         
-        for (const auto& course : courses){ //loop for any course mentioned
+        for (const auto& course : courses){ //loop for any course mentioned to aggregate data
             totalGradePoints += course.getTotalPoints(); //Added for points earned in course
             totalCredits += course.getCredits(); // added for credits earned in course
         }
         
         if (totalCredits == 0) return 0.0;
-        return totalGradePoints / totalCredits;
+        return static_cast<double> (totalGradePoints) / totalCredits; //added cast to double and ensure for the floating point for calculations
     }
+
     //A print to display the report card after filling out courses, hours
     // and grade later to display for the student
     void displayReportCard() const {
+        double totalPoints = 0; //
+        int totalCredits = 0; //
         cout << "\n--- Student Grade Report " << studentName << " ---" << endl;
         cout << left << setw(30) << "Course"
              << right << setw(15) << "Credits"
@@ -68,7 +66,8 @@ class Student {
              << setw(15) << "Total Points" << endl;
         
         cout << string(90, '-') << "\n"; //Formatting line
-        for (int i = 0; i < courses.size(); ++1) {
+        
+        for (const auto& course : courses) {
             course.display(); //this will print course name, credit, grade letter, and grade and total in 1 line
             totalPoints += courses.getTotalPoints(); //adds up all total points for each course
             totalCredits += course.getCredits();
@@ -102,10 +101,12 @@ class Student {
 /*
 Reflection and challenges:
 The challenges/difficult parts I encountered when handling student class is to filling
-out the code for class Student and what needed to be done in order to
-understand what I got wrong via errors. Another is understanding what needs to be placed
+out the code for class Student and what needed to be done to better
+understand for what I got wrong via errors. Another is understanding what needs to be placed
 in public function and whats needed to be put in the private functions 
-in terms of how needed it needed to format. That's when I was working on
-it, I was trying to understand how it it works
-for private and public, such as the string name and add course when using void.
+in terms of how it needs to be formatted. That's when I was working on
+it, I was trying to understand how it it works for private and public,
+such as the string name and adding a course when using void. As well as understanding const
+auto and how it works for course display, credits and total points for course when it
+comes to calculate the GPA. 
 *\
