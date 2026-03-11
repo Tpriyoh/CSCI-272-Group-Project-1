@@ -32,7 +32,7 @@ int main()  {
 
     cout << "How many courses did you take?(1-10): ";
     //While loop was study and referenced through combination of stackoverflow and claude ai for logic understanding
-    while (!(cin >> numOfCourses)|| numOfCourses <1 || numOfCourses > 10) { //validate bad input, this says, keep asking for input until there is no empty input and its within 1 <= x <= 10
+    while (!(cin >> numOfCourses)|| numOfCourses <1 || numOfCourses > 10) { //validate bad input, this says, keep asking for input until there is no empty input and its within 1 < x < 10
         cin.clear(); //reset cin so it can be used again
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); //learned in class, trying this, prof says this flushes the bad input during class. basically after every cin >>, theres left over '\n', in buffer. this .ignore(...) helps us ignore it
         cout <<" Invalid input. Enter a number between 1 and 10: ";
