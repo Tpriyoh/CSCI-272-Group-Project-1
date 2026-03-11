@@ -8,6 +8,7 @@ Group Project 1
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
 #include "Course.h"
 using namespace std;
 
@@ -20,14 +21,7 @@ class Student {
     Student(string name) : studentName(name) { 
         
     }
-    
-    string getCourse() const { // get name for course, returns course name
-        return courses;
-    }
-
-    string getGrade() const { // get name for grade, returns student grade
-        return grade;
-    }
+    // I (Bilal) deleted the get course and getGrade function because they werent running
 
     string getName() const { // get name for name (student name) also returns name for student
         return studentName;
@@ -55,9 +49,14 @@ class Student {
 
     //A print to display the report card after filling out courses, hours
     // and grade later to display for the student
-    void displayReportCard() const {
+    void displayReportCard()  { //I removed the const because const wouldnt allow me to modify the vector.
         double totalPoints = 0; //
         int totalCredits = 0; //
+        
+        sort(courses.begin(),courses.end(),[] (Course& a, Course& b) {
+            return a.getCredits() > b.getCredits();
+        });
+        
         cout << "\n--- Student Grade Report " << studentName << " ---" << endl;
         cout << left << setw(30) << "Course"
              << right << setw(15) << "Credits"
@@ -69,11 +68,11 @@ class Student {
         
         for (const auto& course : courses) {
             course.display(); //this will print course name, credit, grade letter, and grade and total in 1 line
-            totalPoints += courses.getTotalPoints(); //adds up all total points for each course
+            totalPoints += course.getTotalPoints(); //adds up all total points for each course //mistake was a simple extra s in course.
             totalCredits += course.getCredits();
         }
 
-        double gpa = (totalCredit > 0) ? totalPoints / totalCredits: 0.0;
+        double gpa = (totalCredits > 0) ? totalPoints / totalCredits: 0.0; //(totalCredits) was missing an s
          //Checks for divide zero to handle bad input
         string standing;
         if (gpa >= 3.7) { //If else statement that determines student's standing based on their gpa
@@ -87,7 +86,7 @@ class Student {
         // loops through all courses and shows all in single line format.
         cout << string(90, '-') << endl;
         cout << left << setw(30) << "Total Credits:"
-             << right << setw(45) << totalCredit << "\n";
+             << right << setw(45) << totalCredits << "\n"; // << totalCredits was also missing an s
         cout << left << setw(30) << "Total Points:"
              << right << setw(45) << setprecision(2) << totalPoints << "\n";
         cout << left << setw(30) << "Semester GPA: " 
