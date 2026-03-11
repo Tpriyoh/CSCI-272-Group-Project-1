@@ -62,7 +62,7 @@ int main()  {
 			cout << "Invalid Entry. What is your 'letter' grade(A, A-, B+, B, B-, C+, C, C-, D, F): ";
 			getline(cin, grade);
 			
-					for(int j = 0; j < grade.size(); ++j) {
+			for(int j = 0; j < grade.size(); ++j) {
 			grade[j] = toupper(grade[j]);
 		}
 
