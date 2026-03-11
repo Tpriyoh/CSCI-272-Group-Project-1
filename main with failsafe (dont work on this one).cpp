@@ -19,7 +19,7 @@ int main()  {
 
     //vector<Course> courses; // a vector to hold all courses from the users entries.// we already have this in student.h dont need it here
     string name(""), grade("");
-    int numOfCourses(0), credits(0), totalCredit(0); //made int and string vales = to 0 or blank to
+    int numOfCourses(0), credits(0), totalCredit(0); //made int and string vales = to 0 or blank to prevent autofill from occuring.
 
 
 
