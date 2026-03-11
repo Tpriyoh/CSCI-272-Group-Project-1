@@ -7,7 +7,7 @@
 */
 #include <limits> //cite: for purpose of .begin() .end(), introduced through claude, further learning done through stackoverflow post on syntax especially the idea of why != instead of ==.
 #include <algorithm>
-#include "Student.h"//Only need this file since my teammate have pretty much included everything else
+#include "student.h"//Only need this file since my teammate have pretty much included everything else
 int main()  {
     cout << string(62, '=') << "\n"; //format line
     cout << setw(42) << "Student Grade Report\n";
