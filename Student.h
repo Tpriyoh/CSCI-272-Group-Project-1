@@ -69,11 +69,12 @@ class Student {
         
         cout << string(90, '-') << "\n"; //Formatting line
         for (int i = 0; i < courses.size(); ++1) {
-            course[i].display(); //this will print course name, credit, grade letter, and grade and total in 1 line
-            totalPoints += courses[i].getTotalPoints(); //adds up all total points for each course
+            course.display(); //this will print course name, credit, grade letter, and grade and total in 1 line
+            totalPoints += courses.getTotalPoints(); //adds up all total points for each course
+            totalCredits += course.getCredits();
         }
 
-        gpa = (totalCredit > 0) ? totalPoints / totalCredits: 0.0;
+        double gpa = (totalCredit > 0) ? totalPoints / totalCredits: 0.0;
          //Checks for divide zero to handle bad input
         string standing;
         if (gpa >= 3.7) { //If else statement that determines student's standing based on their gpa
