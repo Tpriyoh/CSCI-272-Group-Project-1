@@ -1,29 +1,29 @@
-#include <limits>
-#include <algorithm>
-#include "Student.h" //Only need this file since my teammate have pretty much included everything else
 /* Name: Tun Tun (Jonathan) Aung
  * Course: CSCI 272(1)
  * Professor: Avijit Roy
  * Date: Spring 2026
  * Team Project 1
- * Member: Tanzin Priyoh, Tun Tun (jonathan) Aung, Miguel Llapa
+ * Member: Tanzin Priyoh, Tun Tun (jonathan) Aung, Miguel Llapa, Bilal Ahmed
 */
+#include <limits>
+#include <algorithm>
+#include "Student.h"//Only need this file since my teammate have pretty much included everything else
 int main()  {
     cout << string(62, '=') << "\n"; //format line
     cout << setw(42) << "Student Grade Report\n";
     cout << string(62, '=') << "\n"; //formatting
 
-    vector<Course> courses; // a vector to hold all courses from the users entries.
+    //vector<Course> courses; // a vector to hold all courses from the users entries.// we already have this in student.h dont need it here
     string name(""), grade("");
     int numOfCourses(0), credits(0), totalCredit(0); //made int and string vales = to 0 or blank to
     //double totalPoints(0.0), gpa(0.0);
         //prevent random autofill.
 
-    Student student(name); //Create student object using teammate's student class. Will own all courses
-
     cout << "Student Name: :" ; //Prompt user to enter name
     getline(cin, name);
-
+    Student student(name); //Create student object using teammate's student class. Will own all courses // Moved the line down so the student name actually prints on the report card since we are using the student.h file
+    
+    
     cout << "How many courses did you take?(1-10): ";
     while (!(cin >> numOfCourses)|| numOfCourses <=1 || numOfCourses >= 10) { //validate bad input, this says, keep asking for input until there is no empty input and its within 1 <= x <= 10
         cin.clear(); //reset cin so it can be used again
@@ -71,34 +71,45 @@ int main()  {
                   << setw(15) << "Total Points" << endl;
 
         cout << string (90, '-') << "\n" ; //formatting line
-    for(int i = 0; i < courses.size(); ++i) {
-        courses[i].display(); // will print Course name, credit, gradeLetter, gradeNum, and total in 1 line.
-        //totalPoints += courses[i].getTotalPoints(); // adds up all the total points for each course.
-        //student.getCourses()[i].display(); //Waiting for miguel to implement getCourse in his student file.
+    // for(int i = 0; i < courses.size(); ++i) {
+    //     courses[i].display(); // will print Course name, credit, gradeLetter, gradeNum, and total in 1 line.
+    //     totalPoints += courses[i].getTotalPoints(); // adds up all the total points for each course.
+    //     student.getCourses()[i].display(); //Waiting for miguel to implement getCourse in his student file.
+    // I commented this whole thing out since its already implemented in teh student.h class in the displayReportCard() section.
+    student.displayReportCard();
+    
+    
     }
+        // Commented out this chunk aswell because its also already being hadeled by the student.h class
+    //  gpa = (totalCredit > 0) ? totalPoints / totalCredit: 0.0; //calculates gpa by dividing total poitns and total credits
+    //      //checks for divide zero to handle bad input
+    //  string standing;
+    //  if (gpa >= 3.7) { //If else statement that determines student's standing based off gpa
+    //      standing = "Dean's List";
+    //  } else if (gpa >= 2.0) {
+    //      standing = "Good Standing";
+    //  } else {
+    //      standing = "Probation";
+    //  }
+    //      // Displays Total Credit, Total points, GPA, and standing in a neat and tidy format. Experimented with setw range, but putting at 45 for sake of personal preference
+    //  cout << string ( 90, '-') << "\n" ;
+    //  cout << left << setw(30) << "Total Credits:"
+    //       << right << setw(45) << totalCredit << "\n";
+    //  cout << left << setw(30) << "Total Points:"
+    //       << right << setw(45) << setprecision(2) << totalPoints << "\n";
+    //  cout << left << setw(30) << "Semester GPA: "
+    //       << right << setw(45) << setprecision(2) << gpa << "\n";
+    //  cout << left <<  setw(30) << "Standing: "
+    //       << right << setw(45) << standing << "\n";
+    //  cout << string(90, '=') << "\n";
+    // return 0;
+//}
 
-    // gpa = (totalCredit > 0) ? totalPoints / totalCredit: 0.0; //calculates gpa by dividing total poitns and total credits
-    //     //checks for divide zero to handle bad input
-    // string standing;
-    // if (gpa >= 3.7) { //If else statement that determines student's standing based off gpa
-    //     standing = "Dean's List";
-    // } else if (gpa >= 2.0) {
-    //     standing = "Good Standing";
-    // } else {
-    //     standing = "Probation";
-    // }
-    //     // Displays Total Credit, Total points, GPA, and standing in a neat and tidy format. Experimented with setw range, but putting at 45 for sake of personal preference
-    // cout << string ( 90, '-') << "\n" ;
-    // cout << left << setw(30) << "Total Credits:"
-    //      << right << setw(45) << totalCredit << "\n";
-    // cout << left << setw(30) << "Total Points:"
-    //      << right << setw(45) << setprecision(2) << totalPoints << "\n";
-    // cout << left << setw(30) << "Semester GPA: "
-    //      << right << setw(45) << setprecision(2) << gpa << "\n";
-    // cout << left <<  setw(30) << "Standing: "
-    //      << right << setw(45) << standing << "\n";
-    // cout << string(90, '=') << "\n";
-    return 0;
+// I (Bilal) Worked on fixing the errors and made the extra credit sorting algorithum.
+// Id say the hard part for me was the intitial errors that I into where the code wasnt working due to getCourse and getGrade function not being called properly untill i deleted them and the function was running without a problem.
+// There were some extremely minor errors that were causing issue aswell. It took me a while to realise i can just use the ctrl+f command to make sure were calling the right function.
+// The final issue that I had was with sorting where I first tried for loops but they were kind of confusing. I watched a video on youtube where it showed me asimple sort library that pretty much does it for me.
+
 }
 
 /* Tun Tun (Jonathan) Aung -- 3/7/26
