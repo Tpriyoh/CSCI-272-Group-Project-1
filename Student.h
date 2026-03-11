@@ -30,7 +30,7 @@ class Student {
     }
 
     string getName() const { // get name for name (student name) also returns name for student
-        return StudentName;
+        return studentName;
     }
 
     void addCourse(const Course& c) { //Added so it can add a course to student record
