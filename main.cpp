@@ -5,7 +5,7 @@
  * Team Project 1
  * Member: Tanzin Priyoh, Tun Tun (jonathan) Aung, Miguel Llapa, Bilal Ahmed
 */
-#include <limits>
+#include <limits> //cite: for purpose of .begin() .end(), introduced through claude, further learning done through stackoverflow post on syntax especially the idea of why != instead of ==.
 #include <algorithm>
 #include "Student.h"//Only need this file since my teammate have pretty much included everything else
 int main()  {
@@ -16,18 +16,17 @@ int main()  {
     //vector<Course> courses; // a vector to hold all courses from the users entries.// we already have this in student.h dont need it here
     string name(""), grade("");
     int numOfCourses(0), credits(0), totalCredit(0); //made int and string vales = to 0 or blank to
-    //double totalPoints(0.0), gpa(0.0);
-        //prevent random autofill.
 
     cout << "Student Name: :" ; //Prompt user to enter name
     getline(cin, name);
     Student student(name); //Create student object using teammate's student class. Will own all courses // Moved the line down so the student name actually prints on the report card since we are using the student.h file
-    
-    
+
+
     cout << "How many courses did you take?(1-10): ";
+    //While loop was study and referenced through combination of stackoverflow and claude ai for logic understanding
     while (!(cin >> numOfCourses)|| numOfCourses <=1 || numOfCourses >= 10) { //validate bad input, this says, keep asking for input until there is no empty input and its within 1 <= x <= 10
         cin.clear(); //reset cin so it can be used again
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); //trying this, prof says this flushes the bad input during class. basically after every cin >>, theres left over '\n', in buffer. this .ignore(...) helps us ignore it
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); //learned in class, trying this, prof says this flushes the bad input during class. basically after every cin >>, theres left over '\n', in buffer. this .ignore(...) helps us ignore it
         cout <<" Invalid input. Enter a number between 1 and 10: ";
     }
     cin.ignore(); //clears leftover newline
@@ -40,7 +39,7 @@ int main()  {
         while (!(cin >> credits) || credits <0) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); //build a habit of using this after every cin.
-            cout << "Invalid input, put in number greater than 0";
+            cout << "Invalid input, put in number greater than 0: ";
         }
         totalCredit += credits;
         cin.ignore(); //added again so getline works once more when i call it again.
@@ -71,46 +70,18 @@ int main()  {
                   << setw(15) << "Total Points" << endl;
 
         cout << string (90, '-') << "\n" ; //formatting line
-    // for(int i = 0; i < courses.size(); ++i) {
-    //     courses[i].display(); // will print Course name, credit, gradeLetter, gradeNum, and total in 1 line.
-    //     totalPoints += courses[i].getTotalPoints(); // adds up all the total points for each course.
-    //     student.getCourses()[i].display(); //Waiting for miguel to implement getCourse in his student file.
-    // I commented this whole thing out since its already implemented in teh student.h class in the displayReportCard() section.
     student.displayReportCard();
-    
-    
+
+
     }
-        // Commented out this chunk aswell because its also already being hadeled by the student.h class
-    //  gpa = (totalCredit > 0) ? totalPoints / totalCredit: 0.0; //calculates gpa by dividing total poitns and total credits
-    //      //checks for divide zero to handle bad input
-    //  string standing;
-    //  if (gpa >= 3.7) { //If else statement that determines student's standing based off gpa
-    //      standing = "Dean's List";
-    //  } else if (gpa >= 2.0) {
-    //      standing = "Good Standing";
-    //  } else {
-    //      standing = "Probation";
-    //  }
-    //      // Displays Total Credit, Total points, GPA, and standing in a neat and tidy format. Experimented with setw range, but putting at 45 for sake of personal preference
-    //  cout << string ( 90, '-') << "\n" ;
-    //  cout << left << setw(30) << "Total Credits:"
-    //       << right << setw(45) << totalCredit << "\n";
-    //  cout << left << setw(30) << "Total Points:"
-    //       << right << setw(45) << setprecision(2) << totalPoints << "\n";
-    //  cout << left << setw(30) << "Semester GPA: "
-    //       << right << setw(45) << setprecision(2) << gpa << "\n";
-    //  cout << left <<  setw(30) << "Standing: "
-    //       << right << setw(45) << standing << "\n";
-    //  cout << string(90, '=') << "\n";
-    // return 0;
-//}
+
 
 // I (Bilal) Worked on fixing the errors and made the extra credit sorting algorithum.
 // Id say the hard part for me was the intitial errors that I into where the code wasnt working due to getCourse and getGrade function not being called properly untill i deleted them and the function was running without a problem.
 // There were some extremely minor errors that were causing issue aswell. It took me a while to realise i can just use the ctrl+f command to make sure were calling the right function.
 // The final issue that I had was with sorting where I first tried for loops but they were kind of confusing. I watched a video on youtube where it showed me asimple sort library that pretty much does it for me.
 
-}
+
 
 /* Tun Tun (Jonathan) Aung -- 3/7/26
  * Reflection and challenges:
@@ -127,4 +98,8 @@ int main()  {
  *
  * 3. Understanding the use of cin.clear() and cin.ignore(numeric_limits<streamsize>::max(), '\n') as this is my firs
  * time using this.
+ *
+ * 4.While loop was not covered in class but the concept was introduced to me before through prior classes, however syntax and use were different
+ * i used resoures like claude ai and stackoverflow to understand. AI to provide detail break down examples, and stackoverflow to see realworld
+ * nuance.
  * */
