@@ -47,10 +47,10 @@ class Student {
     //A print to display the report card after filling out courses, hours
     // and grade later to display for the student
     void displayReportCard()  { //I removed the const because const wouldnt allow me to modify the vector.
-        double totalPoints = 0; //
-        int totalCredits = 0; //
+        double totalPoints = 0; 
+        int totalCredits = 0; 
 
-        sort(courses.begin(),courses.end(),[] (Course& a, Course& b) {
+        sort(courses.begin(),courses.end(),[] (Course& a, Course& b) { //sort was placed for the order of the courses the student got
             return a.getCredits() > b.getCredits();
         });
 
@@ -63,12 +63,13 @@ class Student {
 
         cout << string(90, '-') << "\n"; //Formatting line
 
-        for (const auto& course : courses) {
+        for (const auto& course : courses) { //source: google AI: to understand how const auto works for course display statement for total points and credits
             course.display(); //this will print course name, credit, grade letter, and grade and total in 1 line
             totalPoints += course.getTotalPoints(); //adds up all total points for each course //mistake was a simple extra s in course.
             totalCredits += course.getCredits();
         }
 
+        //This was implemented from the main to here due to Jonathan's request
         double gpa = (totalCredits > 0) ? totalPoints / totalCredits: 0.0; //(totalCredits) was missing an s
          //Checks for divide zero to handle bad input
         string standing;
@@ -80,6 +81,7 @@ class Student {
             standing = "Probation";
         }
 
+        //This was also implemented from the main to here due to Jonathan's request to do so
         // loops through all courses and shows all in single line format.
         cout << string(90, '-') << endl;
         cout << left << setw(30) << "Total Credits:"
@@ -105,4 +107,8 @@ it, I was trying to understand how it it works for private and public,
 such as the string name and adding a course when using void. As well as understanding const
 auto and how it works for course display, credits and total points for course when it
 comes to calculate the GPA.
+The source I used is google AI: to help me understand the problem and the necessary details
+Input for me to understand what I did wrong, and help me give a clear picture of what the
+statements should be used in student.h and understand the concepts a bit better.
 */
+
